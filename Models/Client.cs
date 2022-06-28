@@ -9,6 +9,14 @@ namespace WinFormsSales.Models
 {
     class Client
     {
+        public Client(string name, string cPF, string phone, string email)
+        {
+            Name = name;
+            CPF = cPF;
+            Phone = phone;
+            Email = email;
+        }
+
         [Key]
         public int Id { get; set; }
 

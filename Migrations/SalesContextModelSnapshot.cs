@@ -133,13 +133,13 @@ namespace WinFormsSales.Migrations
                     b.HasOne("WinFormsSales.Models.Product", null)
                         .WithMany()
                         .HasForeignKey("ProductsId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("WinFormsSales.Models.Sale", null)
                         .WithMany()
                         .HasForeignKey("salesId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
@@ -148,7 +148,7 @@ namespace WinFormsSales.Migrations
                     b.HasOne("WinFormsSales.Models.Client", "client")
                         .WithMany()
                         .HasForeignKey("ClientId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("client");
