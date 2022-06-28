@@ -19,5 +19,6 @@ namespace WinFormsSales.Models
         public string Name { get; set; }
         public double Price { get; set; }
         public int Inventory { get; set; }
+        public List<Sale> sales { get; set; }
     }
 }
