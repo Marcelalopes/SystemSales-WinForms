@@ -39,7 +39,7 @@
             this.tbPhone = new System.Windows.Forms.MaskedTextBox();
             this.tbCpf = new System.Windows.Forms.MaskedTextBox();
             this.tbName = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnAddC = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvClient)).BeginInit();
             this.SuspendLayout();
@@ -53,7 +53,6 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(600, 80);
             this.panel1.TabIndex = 1;
-            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
             // label1
             // 
@@ -128,18 +127,20 @@
             // 
             // tbPhone
             // 
+            this.tbPhone.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.tbPhone.Location = new System.Drawing.Point(216, 192);
             this.tbPhone.Mask = "(99) 0000-0000";
             this.tbPhone.Name = "tbPhone";
-            this.tbPhone.Size = new System.Drawing.Size(100, 23);
+            this.tbPhone.Size = new System.Drawing.Size(100, 27);
             this.tbPhone.TabIndex = 15;
             // 
             // tbCpf
             // 
+            this.tbCpf.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.tbCpf.Location = new System.Drawing.Point(216, 121);
             this.tbCpf.Mask = "000,000,000-00";
             this.tbCpf.Name = "tbCpf";
-            this.tbCpf.Size = new System.Drawing.Size(100, 23);
+            this.tbCpf.Size = new System.Drawing.Size(100, 27);
             this.tbCpf.TabIndex = 14;
             // 
             // tbName
@@ -149,20 +150,21 @@
             this.tbName.Size = new System.Drawing.Size(100, 23);
             this.tbName.TabIndex = 13;
             // 
-            // button1
+            // btnAddC
             // 
-            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(252)))), ((int)(((byte)(163)))), ((int)(((byte)(17)))));
-            this.button1.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.button1.FlatAppearance.BorderSize = 0;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("Mongolian Baiti", 13.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.button1.ForeColor = System.Drawing.SystemColors.ControlLight;
-            this.button1.Location = new System.Drawing.Point(370, 165);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(97, 43);
-            this.button1.TabIndex = 22;
-            this.button1.Text = "Add";
-            this.button1.UseVisualStyleBackColor = false;
+            this.btnAddC.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(252)))), ((int)(((byte)(163)))), ((int)(((byte)(17)))));
+            this.btnAddC.DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.btnAddC.FlatAppearance.BorderSize = 0;
+            this.btnAddC.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAddC.Font = new System.Drawing.Font("Mongolian Baiti", 13.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnAddC.ForeColor = System.Drawing.SystemColors.ControlLight;
+            this.btnAddC.Location = new System.Drawing.Point(362, 167);
+            this.btnAddC.Name = "btnAddC";
+            this.btnAddC.Size = new System.Drawing.Size(97, 43);
+            this.btnAddC.TabIndex = 34;
+            this.btnAddC.Text = "Add";
+            this.btnAddC.UseVisualStyleBackColor = false;
+            this.btnAddC.Click += new System.EventHandler(this.btnAddC_Click);
             // 
             // FormClient
             // 
@@ -170,7 +172,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(33)))), ((int)(((byte)(61)))));
             this.ClientSize = new System.Drawing.Size(600, 450);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btnAddC);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label4);
@@ -205,6 +207,7 @@
         private MaskedTextBox tbPhone;
         private MaskedTextBox tbCpf;
         private TextBox tbName;
-        private Button button1;
+        private Button btnAddClient;
+        private Button btnAddC;
     }
 }

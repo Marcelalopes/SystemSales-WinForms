@@ -9,6 +9,14 @@ namespace WinFormsSales.Models
 {
     class Product
     {
+        public Product(string codeEAN, string name, double price, int inventory)
+        {
+            CodeEAN = codeEAN;
+            Name = name;
+            Price = price;
+            Inventory = inventory;
+        }
+
         [Key]
         public int Id { get; set; }
 

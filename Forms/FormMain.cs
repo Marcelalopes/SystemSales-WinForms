@@ -54,7 +54,7 @@ namespace WinFormsSales
         private void btnProduct_Click(object sender, EventArgs e)
         {
             ActiveButton(btnProduct);
-            //FormShow();
+            FormShow(new FormProduct());
         }
 
         private void btnSale_Click(object sender, EventArgs e)
@@ -66,6 +66,11 @@ namespace WinFormsSales
         private void btnLogout_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void pictureBox2_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
