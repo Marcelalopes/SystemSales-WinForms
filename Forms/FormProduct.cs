@@ -29,17 +29,27 @@ namespace WinFormsSales.Forms
         /// </summary>
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            if (nudInventory.Value == 0)
-                MessageBox.Show("Inventory Invalid!", "Alert");
-            else
+            try
             {
-                Product p = new Product(tbCodeEAN.Text, tbName.Text, double.Parse(tbPrice.Text), Convert.ToInt32(nudInventory.Value));
-                db.Products.Add(p);
-                db.SaveChanges();
+                if (tbCodeEAN.Text == null || tbName.Text == null || tbPrice.Text == null)
+                    MessageBox.Show("All fields must be filled!", "Alert");
+                else if (nudInventory.Value == 0)
+                    MessageBox.Show("Inventory Invalid!", "Alert");
+                else
+                {
+                    Product p = new Product(tbCodeEAN.Text, tbName.Text, double.Parse(tbPrice.Text), Convert.ToInt32(nudInventory.Value));
+                    db.Products.Add(p);
+                    db.SaveChanges();
+                }
+
+                UpdateDGV(db);
+                MessageBox.Show("registred product!");
+            }
+            catch (Exception err)
+            {
+                MessageBox.Show(err.Message, "Alert");
             }
 
-            UpdateDGV(db);
-            MessageBox.Show("registred product!");
         }
 
         /// <summary>

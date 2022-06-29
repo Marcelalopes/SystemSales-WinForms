@@ -29,11 +29,23 @@ namespace WinFormsSales.Forms
         /// </summary>
         private void btnAddC_Click(object sender, EventArgs e)
         {
-            Client c = new Client(tbName.Text, tbCpf.Text, tbPhone.Text, tbEmail.Text);
-            db.Clients.Add(c);
-            db.SaveChanges();
-
-            UpdateDGV(db);
+            try
+            {
+                if (tbName.Text == null || tbCpf.Text == null || tbPhone.Text == null || tbEmail.Text == null)
+                    MessageBox.Show("All fields must be filled!", "Alert");
+                else
+                {
+                    Client c = new Client(tbName.Text, tbCpf.Text, tbPhone.Text, tbEmail.Text);
+                    db.Clients.Add(c);
+                    db.SaveChanges();
+                    UpdateDGV(db);
+                }                
+            }
+            catch (Exception err)
+            {
+                MessageBox.Show(err.Message,"Alert");
+            }          
+            
         }
 
         private void FormClient_Load(object sender, EventArgs e)

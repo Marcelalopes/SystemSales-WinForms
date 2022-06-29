@@ -27,7 +27,6 @@ namespace WinFormsSales.Forms
         {
             InitializeComponent();
             UpdateDGV(db);
-            AddListView(cart);
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -54,13 +53,27 @@ namespace WinFormsSales.Forms
         /// </summary>
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            var line = dgvProducts.CurrentCell.OwningRow;
-            var price = line.Cells[3].Value.ToString();
-            var idproduct = line.Cells[0].Value.ToString();
+            try
+            {
+                var line = dgvProducts.CurrentCell.OwningRow;
+                var price = line.Cells[3].Value.ToString();
+                var idproduct = line.Cells[0].Value.ToString();
+                var inventory = line.Cells[4].Value.ToString();
 
-            double valorTotal = (int)nudQuantity.Value * double.Parse(price);
-            cart.Add(new ItemSale(int.Parse(idproduct), double.Parse(price)));
-            listView1.Items.Add(idproduct,price);
+                if (Convert.ToInt32(inventory) < (int)nudQuantity.Value)
+                    MessageBox.Show("Out of stock!", "Alert");
+                else if (nudQuantity.Value == 0)
+                    MessageBox.Show("Invalid quantity!", "Alert");
+                else
+                    cart.Add(new ItemSale(int.Parse(idproduct), double.Parse(price)));
+
+                listView1.Items.Add(idproduct, price);
+            }
+            catch (Exception err)
+            {
+                MessageBox.Show(err.Message,"Alert");
+            }
+            
         }
 
         /// <summary>
@@ -68,36 +81,32 @@ namespace WinFormsSales.Forms
         /// </summary>
         private void btnBuy_Click(object sender, EventArgs e)
         {
-            double total = 0;
-            int idClient = int.Parse(cbIdClient.SelectedValue.ToString());
-
-            List<ItemSale> itens = new List<ItemSale>();
-
-            foreach (ItemSale i in cart)
+            try
             {
-                total += i.Price;
-                itens.Add(new ItemSale(i.SaleId, i.ProductId, i.Price, Convert.ToInt32(nudQuantity.Value), total));
+                double total = 0;
+                int idClient = int.Parse(cbIdClient.SelectedValue.ToString());
+
+                List<ItemSale> itens = new List<ItemSale>();
+
+                foreach (ItemSale i in cart)
+                {
+                    total += i.Price;
+                    itens.Add(new ItemSale(i.SaleId, i.ProductId, i.Price, Convert.ToInt32(nudQuantity.Value), total));
+                }
+
+                Sale s = new Sale(idClient, total);
+                db.Sales.Add(s);
+
+                db.SaveChanges();
+                cart.Clear();
+                UpdateDGV(db);
+                MessageBox.Show("Registred sale!");
             }
-            Sale s = new Sale(idClient, total);
-            db.Sales.Add(s);            
-
-            db.SaveChanges();
-            cart.Clear();
-            UpdateDGV(db);
-            MessageBox.Show("Registred sale!");
-        }
-
-        /// <summary>
-        /// method for popular list view
-        /// </summary>
-        /// <param name="list">products list</param>
-        private void AddListView(List<ItemSale> list)
-        {
-            listView1.Text = " ";
-            foreach (ItemSale i in list)
+            catch (Exception err)
             {
-                listView1.Items.Add(i.Id.ToString(), (int)i.Price);
+                MessageBox.Show(err.Message,"Alert");
             }
+           
         }
 
         private void panel1_Paint(object sender, PaintEventArgs e)
