@@ -5,11 +5,11 @@ namespace WinFormsSales.Forms
 {
     public partial class FormClient : Form
     {
-        SalesContext context = new SalesContext();
+        SalesContext db = new SalesContext();
         public FormClient()
         {
             InitializeComponent();
-            UpdateDGV(context);
+            UpdateDGV(db);
             
         }
         private void UpdateDGV(SalesContext db)
@@ -20,10 +20,15 @@ namespace WinFormsSales.Forms
         private void btnAddC_Click(object sender, EventArgs e)
         {
             Client c = new Client(tbName.Text, tbCpf.Text, tbPhone.Text, tbEmail.Text);
-            context.Clients.Add(c);
-            context.SaveChanges();
+            db.Clients.Add(c);
+            db.SaveChanges();
 
-            UpdateDGV(context);
+            UpdateDGV(db);
+        }
+
+        private void FormClient_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

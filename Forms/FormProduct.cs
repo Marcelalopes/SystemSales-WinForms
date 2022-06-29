@@ -14,20 +14,20 @@ namespace WinFormsSales.Forms
 {
     public partial class FormProduct : Form
     {
-        SalesContext context = new SalesContext();
+        SalesContext db = new SalesContext();
         public FormProduct()
         {
             InitializeComponent();
-            UpdateDGV(context);
+            UpdateDGV(db);
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
             Product p = new Product(tbCodeEAN.Text,tbName.Text, double.Parse(tbPrice.Text), Convert.ToInt32(nudInventory.Value));
-            context.Products.Add(p);
-            context.SaveChanges();
+            db.Products.Add(p);
+            db.SaveChanges();
 
-            UpdateDGV(context);
+            UpdateDGV(db);
         }
         private void UpdateDGV(SalesContext db)
         {

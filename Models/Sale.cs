@@ -10,6 +10,15 @@ namespace WinFormsSales.Models
 {
     class Sale
     {
+        public Sale(int clientId, int productId, double price, int quantity, double totalValue)
+        {
+            ClientId = clientId;
+            ProductId = productId;
+            Price = price;
+            Quantity = quantity;
+            TotalValue = totalValue;
+        }
+
         [Key]
         public int Id { get; set; }
         [ForeignKey("Client")]

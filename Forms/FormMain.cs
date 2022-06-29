@@ -60,7 +60,7 @@ namespace WinFormsSales
         private void btnSale_Click(object sender, EventArgs e)
         {
             ActiveButton(btnSale);
-            //FormShow();
+            FormShow( new FormSale());
         }
 
         private void btnLogout_Click(object sender, EventArgs e)

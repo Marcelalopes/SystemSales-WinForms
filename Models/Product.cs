@@ -17,6 +17,12 @@ namespace WinFormsSales.Models
             Inventory = inventory;
         }
 
+        public Product(int id, double price)
+        {
+            Id = id;
+            Price = price;
+        }
+
         [Key]
         public int Id { get; set; }
 
