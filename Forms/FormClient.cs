@@ -31,7 +31,7 @@ namespace WinFormsSales.Forms
         {
             try
             {
-                if (tbName.Text == null || tbCpf.Text == null || tbPhone.Text == null || tbEmail.Text == null)
+                if (tbName.Text.ToString() == "" || tbCpf.Text.ToString() == "   .   .   -" || tbPhone.Text.ToString() == "(  )     -" || tbEmail.Text.ToString() == "")
                     MessageBox.Show("All fields must be filled!", "Alert");
                 else
                 {

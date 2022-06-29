@@ -31,7 +31,7 @@ namespace WinFormsSales.Forms
         {
             try
             {
-                if (tbCodeEAN.Text == null || tbName.Text == null || tbPrice.Text == null)
+                if (tbCodeEAN.Text.ToString() == "" || tbName.Text.ToString() == "")
                     MessageBox.Show("All fields must be filled!", "Alert");
                 else if (nudInventory.Value == 0)
                     MessageBox.Show("Inventory Invalid!", "Alert");
@@ -40,10 +40,9 @@ namespace WinFormsSales.Forms
                     Product p = new Product(tbCodeEAN.Text, tbName.Text, double.Parse(tbPrice.Text), Convert.ToInt32(nudInventory.Value));
                     db.Products.Add(p);
                     db.SaveChanges();
-                }
-
-                UpdateDGV(db);
-                MessageBox.Show("registred product!");
+                    UpdateDGV(db);
+                    MessageBox.Show("registred product!");
+                }                
             }
             catch (Exception err)
             {
