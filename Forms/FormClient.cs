@@ -30,5 +30,15 @@ namespace WinFormsSales.Forms
         {
 
         }
+
+        private void tbName_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (Char.IsDigit(e.KeyChar))
+            {
+                MessageBox.Show("This field doesn't accept numbers");
+                e.Handled = true;
+            }
+
+        }
     }
 }

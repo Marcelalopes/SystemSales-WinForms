@@ -23,9 +23,14 @@ namespace WinFormsSales.Forms
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            Product p = new Product(tbCodeEAN.Text,tbName.Text, double.Parse(tbPrice.Text), Convert.ToInt32(nudInventory.Value));
-            db.Products.Add(p);
-            db.SaveChanges();
+            if (nudInventory.Value == 0)
+                MessageBox.Show("Inventory Invalid!", "Alert");
+            else
+            {
+                Product p = new Product(tbCodeEAN.Text, tbName.Text, double.Parse(tbPrice.Text), Convert.ToInt32(nudInventory.Value));
+                db.Products.Add(p);
+                db.SaveChanges();
+            }
 
             UpdateDGV(db);
         }
