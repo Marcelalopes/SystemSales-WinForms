@@ -16,10 +16,11 @@ namespace WinFormsSales.Context
         public DbSet<Client> Clients { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<Sale> Sales { get; set; }
+        public DbSet<ItemSale> SalesItems { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder options)
         {
-            options.UseSqlServer("server=DESKTOP-9G183NR\\SQLEXPRESS;database=sale_db;trusted_connection=true;");
+            options.UseSqlServer("server=DESKTOP-9G183NR\\SQLEXPRESS;database=sales2;trusted_connection=true;");
         }
     }
 }

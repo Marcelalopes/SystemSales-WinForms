@@ -22,7 +22,7 @@ namespace WinFormsSales.Forms
         /// <summary>
         /// cart list
         /// </summary>
-        private List<Product> cart = new List<Product>();
+        private List<ItemSale> cart = new List<ItemSale>();
         public FormSale()
         {
             InitializeComponent();
@@ -55,18 +55,12 @@ namespace WinFormsSales.Forms
         private void btnAdd_Click(object sender, EventArgs e)
         {
             var line = dgvProducts.CurrentCell.OwningRow;
-            var idproduct = line.Cells[0].Value.ToString();
             var price = line.Cells[3].Value.ToString();
-            var estoque = line.Cells[4].Value.ToString();
+            var idproduct = line.Cells[0].Value.ToString();
 
-            if (Convert.ToInt32(estoque) < (int)nudQuantity.Value)
-                MessageBox.Show("Out of stock!", "Alert");
-            else if (nudQuantity.Value == 0)
-                MessageBox.Show("Invalid quantity!", "Alert");
-            else
-                cart.Add(new Product(int.Parse(idproduct), double.Parse(price)));
-
-            AddListView(cart);
+            double valorTotal = (int)nudQuantity.Value * double.Parse(price);
+            cart.Add(new ItemSale(int.Parse(idproduct), double.Parse(price)));
+            listView1.Items.Add(idproduct,price);
         }
 
         /// <summary>
@@ -77,31 +71,30 @@ namespace WinFormsSales.Forms
             double total = 0;
             int idClient = int.Parse(cbIdClient.SelectedValue.ToString());
 
-            foreach (Product i in cart)
-            {
-                total += i.Price * Convert.ToInt32(nudQuantity.Value);                
-            }
+            List<ItemSale> itens = new List<ItemSale>();
 
-            foreach (Product i in cart)
+            foreach (ItemSale i in cart)
             {
-                Sale s = new Sale(idClient, i.Id, i.Price, Convert.ToInt32(nudQuantity.Value), total);
-                i.Inventory -= (int)nudQuantity.Value;
-                db.Sales.Add(s);
+                total += i.Price;
+                itens.Add(new ItemSale(i.SaleId, i.ProductId, i.Price, Convert.ToInt32(nudQuantity.Value), total));
             }
+            Sale s = new Sale(idClient, total);
+            db.Sales.Add(s);            
 
             db.SaveChanges();
             cart.Clear();
             UpdateDGV(db);
+            MessageBox.Show("Registred sale!");
         }
 
         /// <summary>
         /// method for popular list view
         /// </summary>
         /// <param name="list">products list</param>
-        private void AddListView(List<Product> list)
+        private void AddListView(List<ItemSale> list)
         {
             listView1.Text = " ";
-            foreach (Product i in list)
+            foreach (ItemSale i in list)
             {
                 listView1.Items.Add(i.Id.ToString(), (int)i.Price);
             }

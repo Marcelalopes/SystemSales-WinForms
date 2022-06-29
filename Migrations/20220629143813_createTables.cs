@@ -4,7 +4,7 @@
 
 namespace WinFormsSales.Migrations
 {
-    public partial class versao1 : Migration
+    public partial class createTables : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -47,6 +47,20 @@ namespace WinFormsSales.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     ClientId = table.Column<int>(type: "int", nullable: false),
+                    TotalValue = table.Column<double>(type: "float", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Sales", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "SalesItems",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    SaleId = table.Column<int>(type: "int", nullable: false),
                     ProductId = table.Column<int>(type: "int", nullable: false),
                     Price = table.Column<double>(type: "float", nullable: false),
                     Quantity = table.Column<int>(type: "int", nullable: false),
@@ -54,54 +68,14 @@ namespace WinFormsSales.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Sales", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Sales_Clients_ClientId",
-                        column: x => x.ClientId,
-                        principalTable: "Clients",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                    table.PrimaryKey("PK_SalesItems", x => x.Id);
                 });
-
-            migrationBuilder.CreateTable(
-                name: "ProductSale",
-                columns: table => new
-                {
-                    ProductsId = table.Column<int>(type: "int", nullable: false),
-                    salesId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ProductSale", x => new { x.ProductsId, x.salesId });
-                    table.ForeignKey(
-                        name: "FK_ProductSale_Products_ProductsId",
-                        column: x => x.ProductsId,
-                        principalTable: "Products",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_ProductSale_Sales_salesId",
-                        column: x => x.salesId,
-                        principalTable: "Sales",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_ProductSale_salesId",
-                table: "ProductSale",
-                column: "salesId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Sales_ClientId",
-                table: "Sales",
-                column: "ClientId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "ProductSale");
+                name: "Clients");
 
             migrationBuilder.DropTable(
                 name: "Products");
@@ -110,7 +84,7 @@ namespace WinFormsSales.Migrations
                 name: "Sales");
 
             migrationBuilder.DropTable(
-                name: "Clients");
+                name: "SalesItems");
         }
     }
 }

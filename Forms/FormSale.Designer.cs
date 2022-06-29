@@ -156,7 +156,7 @@
             // 
             // versao1BindingSource
             // 
-            this.versao1BindingSource.DataSource = typeof(WinFormsSales.Migrations.versao1);
+            //this.versao1BindingSource.DataSource = typeof(WinFormsSales.Migrations.versao1);
             // 
             // dgvSales
             // 
