@@ -14,6 +14,9 @@ namespace WinFormsSales.Forms
 {
     public partial class FormProduct : Form
     {
+        /// <summary>
+        /// bank connection object
+        /// </summary>
         SalesContext db = new SalesContext();
         public FormProduct()
         {
@@ -21,6 +24,9 @@ namespace WinFormsSales.Forms
             UpdateDGV(db);
         }
 
+        /// <summary>
+        /// method to register product
+        /// </summary>
         private void btnAdd_Click(object sender, EventArgs e)
         {
             if (nudInventory.Value == 0)
@@ -33,12 +39,20 @@ namespace WinFormsSales.Forms
             }
 
             UpdateDGV(db);
+            MessageBox.Show("registred product!");
         }
+
+        /// <summary>
+        /// method to populate and update the data grid view
+        /// </summary>
         private void UpdateDGV(SalesContext db)
         {
             dgvProduct.DataSource = db.Products.ToList();
         }
 
+        /// <summary>
+        /// method to allow only comma and number in price text box
+        /// </summary>
         private void tbPrice_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!Char.IsDigit(e.KeyChar) && e.KeyChar != Convert.ToChar(Keys.Back))
@@ -53,6 +67,11 @@ namespace WinFormsSales.Forms
                     e.Handled = true;
                 }
             }
+        }
+
+        private void FormProduct_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

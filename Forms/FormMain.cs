@@ -4,12 +4,19 @@ namespace WinFormsSales
 {
     public partial class FormMain : Form
     {
+        /// <summary>
+        /// variable to store form to be called
+        /// </summary>
         private Form frmAtivo;
         public FormMain()
         {
             InitializeComponent();
         }
 
+        /// <summary>
+        /// method to call the form to be opened
+        /// </summary>
+        /// <param name="frm">form variable</param>
         private void FormShow(Form frm)
         {
             ActiveFormClose();
@@ -20,12 +27,19 @@ namespace WinFormsSales
             frm.Show();
         }
 
+        /// <summary>
+        /// method to close active form
+        /// </summary>
         private void ActiveFormClose()
         {
             if (frmAtivo != null)
                 frmAtivo.Close();
         }
 
+        /// <summary>
+        /// method to active button
+        /// </summary>
+        /// <param name="frmAtivo"></param>
         private void ActiveButton(Button frmAtivo)
         {
             foreach (Control c in panelMenu.Controls)

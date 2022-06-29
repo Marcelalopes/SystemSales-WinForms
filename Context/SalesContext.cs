@@ -8,6 +8,9 @@ using WinFormsSales.Models;
 
 namespace WinFormsSales.Context
 {
+    /// <summary>
+    /// Bank connection class
+    /// </summary>
     class SalesContext: DbContext
     { 
         public DbSet<Client> Clients { get; set; }

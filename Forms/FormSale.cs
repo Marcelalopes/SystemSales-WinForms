@@ -14,7 +14,14 @@ namespace WinFormsSales.Forms
 {
     public partial class FormSale : Form
     {
+        /// <summary>
+        /// bank connection object
+        /// </summary>
         SalesContext db = new SalesContext();
+
+        /// <summary>
+        /// cart list
+        /// </summary>
         private List<Product> cart = new List<Product>();
         public FormSale()
         {
@@ -27,15 +34,24 @@ namespace WinFormsSales.Forms
         {
             
         }
+
+        /// <summary>
+        /// method to populate and update the data grid view
+        /// </summary>
+        /// <param name="db">bank connection object</param>
         private void UpdateDGV(SalesContext db)
         {
             dgvProducts.DataSource = db.Products.ToList();
             dgvSales.DataSource = db.Sales.ToList();
+
             cbIdClient.DataSource = db.Clients.ToList();
             cbIdClient.DisplayMember = "name";
             cbIdClient.ValueMember = "Id";
         }
 
+        /// <summary>
+        /// method to add products to cart
+        /// </summary>
         private void btnAdd_Click(object sender, EventArgs e)
         {
             var line = dgvProducts.CurrentCell.OwningRow;
@@ -53,6 +69,9 @@ namespace WinFormsSales.Forms
             AddListView(cart);
         }
 
+        /// <summary>
+        /// checkout method
+        /// </summary>
         private void btnBuy_Click(object sender, EventArgs e)
         {
             double total = 0;
@@ -74,6 +93,11 @@ namespace WinFormsSales.Forms
             cart.Clear();
             UpdateDGV(db);
         }
+
+        /// <summary>
+        /// method for popular list view
+        /// </summary>
+        /// <param name="list">products list</param>
         private void AddListView(List<Product> list)
         {
             listView1.Text = " ";
@@ -81,6 +105,11 @@ namespace WinFormsSales.Forms
             {
                 listView1.Items.Add(i.Id.ToString(), (int)i.Price);
             }
+        }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }
