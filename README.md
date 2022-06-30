@@ -1,6 +1,17 @@
 # SystemSales-WinForms
+## Windows Form + EntityFramework
 
-![Home Screen](C:\Users\marce\OneDrive\Imagens\WhatsApp Image 2022-06-29 at 10.40.12.jpeg)
-![Client Screen](C:\Users\marce\OneDrive\Imagens\client.jpeg)
-![Product Screen](C:\Users\marce\OneDrive\Imagens\product.jpeg)
-![Sale Screen](C:\Users\marce\OneDrive\Imagens\sale.jpeg)
+Projeto que o usuário cadastre clientes e produtos, e permite que o sistema realize vendas a partir dos clientes e produtos cadastrados.
+
+## Tela Inicial
+![Home Screen](Assets/home.jpeg)
+
+## Tela de cadastro de clintes
+![Client Screen](Assets/client.jpeg)
+
+## Tela de cadastro de produtos
+![Product Screen](Assets/product.jpeg)
+
+## Tela de adicionar vendas
+![Sale Screen](Assets/sale.jpeg)
+
